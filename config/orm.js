@@ -1,18 +1,23 @@
 var connection = require("../config/connection.js");
 
 var orm = {
-	selectAll: function(){
-		connection.query("SELECT * FROM burgers", function(err, result){
-			console.log(result);
+	selectAll: function(tableInput, cb){
+		var queryString = "SELECT * FROM " + tableInput + ";";
+		connection.query(queryString, function(err, result){
+			if(err) throw err;
+			cb(result);
 		});
-	}
+	},
 	insertOne: function(tableInput){
 		var queryString = "INSERT INTO ??.?? VALUES ?"
-		connection.query("INSERT INTO quotes (quote) VALUES (?)", [req.body.quote], function(err, result)
-	}
+		connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.burger], function(err, result){
+			if(err) throw err;
+			cb(result);
+		});
+	},
 	updateOne: function(){
 
-	}
+	},
   selectWhere: function(tableInput, colToSearch, valOfCol, callback) {
     var queryString = "SELECT * FROM ?? WHERE ?? = ?";
 
